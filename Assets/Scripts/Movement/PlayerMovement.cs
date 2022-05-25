@@ -73,8 +73,9 @@ public class PlayerMovement : MonoBehaviour
     Color rayColor;
     if(drawGroundcheckRaycast){ //Debug raycast
     if (raycastHit.collider != null)
-    rayColor = Color.green;
-    else rayColor = Color.red;
+      rayColor = Color.green;
+    else 
+      rayColor = Color.red;
     Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeight), rayColor);
     }
 
