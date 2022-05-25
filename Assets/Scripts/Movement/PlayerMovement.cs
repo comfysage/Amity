@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
   Rigidbody2D rb;
   PlayerInputActions playerInputActions;
 
-  float movementSpeed = 6f;
+  float movementSpeed = 3.2f;
   bool speedCap = true;
 
   void JumpAction(InputAction.CallbackContext context)
