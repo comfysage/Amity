@@ -42,6 +42,14 @@ public class PlayerMovement : MonoBehaviour
   void FixedUpdate()
   {
     Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+    if (inputVector.x > 0)
+    {
+      transform.localScale = new Vector3(2, 2, 2);
+    }
+    if (inputVector.x < 0)
+    {
+      transform.localScale = new Vector3(-2, 2, 2);
+    }
     rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
     if (speedCap)
     {
