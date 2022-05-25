@@ -6,20 +6,33 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
   [SerializeField]
+  LayerMask environmentMask;
   Rigidbody2D rb;
+  BoxCollider2D bc;
   PlayerInputActions playerInputActions;
 
   float movementSpeed = 3.2f;
   bool speedCap = true;
 
+  float jumpForce = 5;
+  int jumpCount = 0;
+
   void JumpAction(InputAction.CallbackContext context)
   {
-    rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
+    if (isGrounded() || jumpCount < 2)
+    {
+      // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
+      rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
+      jumpCount++;
+      return;
+    }
   }
 
   void Awake()
   {
     rb = GetComponent<Rigidbody2D>();
+    bc = GetComponent<BoxCollider2D>();
+
 
     playerInputActions = new PlayerInputActions();
     playerInputActions.Player.Enable();
@@ -34,6 +47,28 @@ public class PlayerMovement : MonoBehaviour
     {
       CapVelocity();
     }
+
+    if (!isGrounded() && jumpCount == 0) jumpCount = 1;
+    if (isGrounded()) jumpCount = 0;
+  }
+
+  bool isGrounded()
+  {
+    float extraHeight = .1f;
+    RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeight, environmentMask);
+
+    Color rayColor;
+    if (raycastHit.collider != null)
+    {
+      rayColor = Color.green;
+    }
+    else
+    {
+      rayColor = Color.red;
+    }
+    Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeight), rayColor);
+
+    return raycastHit.collider != null;
   }
 
   void CapVelocity()
