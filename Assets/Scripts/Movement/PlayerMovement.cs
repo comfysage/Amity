@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
   float jumpForce = 5;
   [SerializeField]
   int maxJump = 2;
+  [SerializeField]
+  float forgiveJump;
+  
+  float _forgiveJump;
+
   int jumpCount = 0;
 
   [Space(2f)]
@@ -34,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
 
   void JumpAction(InputAction.CallbackContext context)
   {
-    if (isGrounded() || jumpCount < maxJump)
+    if (isGrounded() || jumpCount < maxJump || _forgiveJump > 0)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
@@ -68,7 +73,11 @@ public class PlayerMovement : MonoBehaviour
     if (speedCap) CapVelocity();
 
 
-    if (!isGrounded() && jumpCount == 0) jumpCount = 1;
+    if (!isGrounded() && jumpCount == 0)
+    {
+    jumpCount = 1;
+    StartCoroutine(JumpForgive());
+    }
     if (isGrounded()) jumpCount = 0;
   }
 
@@ -94,5 +103,13 @@ public class PlayerMovement : MonoBehaviour
     float cappedXVelocity = Mathf.Min(Mathf.Abs(rb.velocity.x), movementSpeed) * Mathf.Sign(rb.velocity.x);
 
     rb.velocity = new Vector2(cappedXVelocity, rb.velocity.y);
+  }
+
+  IEnumerator JumpForgive(){
+    _forgiveJump = forgiveJump;
+    while(_forgiveJump > 0 && !isGrounded()){
+      _forgiveJump -= Time.deltaTime;
+      yield return null;
+    }
   }
 }

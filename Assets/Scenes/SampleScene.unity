@@ -870,6 +870,7 @@ MonoBehaviour:
   speedCap: 1
   jumpForce: 5
   maxJump: 2
+  forgiveJump: 0.25
   drawGroundcheckRaycast: 0
 --- !u!1 &1662202232
 GameObject:
