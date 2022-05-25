@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
   [SerializeField]
   float jumpForce = 5;
   [SerializeField]
+  int maxJump = 2;
   int jumpCount = 0;
 
   [Space(2f)]
@@ -29,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
   void JumpAction(InputAction.CallbackContext context)
   {
-    if (isGrounded() || jumpCount < 2)
+    if (isGrounded() || jumpCount < maxJump)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
