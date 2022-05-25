@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
   [SerializeField]
   Rigidbody2D rb;
 
-  public void Jump()
+  public void Jump(InputAction.CallbackContext context)
   {
     rb.AddForce(Vector2.up * 1.8f, ForceMode2D.Impulse);
   }
