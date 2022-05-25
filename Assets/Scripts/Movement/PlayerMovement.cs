@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    
-    void Start()
-    {
-        
-    }
+  [SerializeField]
+  Rigidbody2D rb;
+  void Start()
+  {
+    rb = GetComponent<Rigidbody2D>();
+  }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+  void Update()
+  {
+
+  }
 }
