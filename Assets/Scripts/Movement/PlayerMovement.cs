@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
 
   public void JumpAction(InputAction.CallbackContext context)
   {
-    rb.AddForce(Vector2.up * 1.8f, ForceMode2D.Impulse);
+    rb.AddForce(Vector2.up * 5f, ForceMode2D.Impulse);
   }
 
   void Awake()
