@@ -7,7 +7,10 @@ public class PlayerMovement : MonoBehaviour
   [SerializeField]
   Rigidbody2D rb;
 
-  public void Jump() { }
+  public void Jump()
+  {
+    rb.AddForce(Vector2.up * 1.8f, ForceMode2D.Impulse);
+  }
 
   void Start()
   {
