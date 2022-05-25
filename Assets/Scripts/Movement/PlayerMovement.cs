@@ -28,6 +28,10 @@ public class PlayerMovement : MonoBehaviour
   [SerializeField]
   bool drawGroundcheckRaycast;
 
+
+  //local variables
+  Vector3 _localScale;
+
   void JumpAction(InputAction.CallbackContext context)
   {
     if (isGrounded() || jumpCount < maxJump)
@@ -48,19 +52,21 @@ public class PlayerMovement : MonoBehaviour
     playerInputActions = new PlayerInputActions();
     playerInputActions.Player.Enable();
     playerInputActions.Player.Jump.performed += JumpAction;
+
+    _localScale = gameObject.transform.localScale;
+
   }
 
   void FixedUpdate()
   {
     Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-    if (inputVector.x > 0) transform.localScale = new Vector3(2, 2, 2);
-    
-    if (inputVector.x < 0) transform.localScale = new Vector3(-2, 2, 2);
+    if (inputVector.x > 0) transform.localScale = new Vector3(_localScale.x, _localScale.y, _localScale.z);
+    if (inputVector.x < 0) transform.localScale = new Vector3(-_localScale.x, _localScale.y, _localScale.z);
 
     rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
 
     if (speedCap) CapVelocity();
-   
+
 
     if (!isGrounded() && jumpCount == 0) jumpCount = 1;
     if (isGrounded()) jumpCount = 0;
