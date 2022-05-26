@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
   {
     Debug.Log(inputVector.x);
 
+    // Movement Input so flip character and set idle bool to false
     if (inputVector.x > 0)
     {
       transform.localScale = new Vector3(_localScale.x, _localScale.y, _localScale.z);
@@ -101,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
       anim.SetBool("isIdle", false);
     }
 
+    // if it is not grounded, always set airborne to true 
     if (!isGrounded())
     {
       anim.SetBool("isIdle", false);
@@ -109,8 +111,10 @@ public class PlayerMovement : MonoBehaviour
       return;
     };
 
-    anim.SetBool("isAirborne", false); // is not airborne
+    // is not airborne
+    anim.SetBool("isAirborne", false);
 
+    // if there is input and is not grounded (already checked) set running to true
     if (inputVector.x != 0)
     {
       anim.SetBool("isIdle", false);
@@ -118,8 +122,10 @@ public class PlayerMovement : MonoBehaviour
       return;
     }
 
+    // otherwise running is false
     anim.SetBool("isRunning", false);
 
+    // if the character has no velocity, it is idle
     if (rb.velocity == new Vector2(0, 0))
     {
       anim.SetBool("isIdle", true);
