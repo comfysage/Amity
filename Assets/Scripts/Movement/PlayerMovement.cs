@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     anim.SetBool("isAirborne", false);
 
     // if there is input and is not grounded (already checked) set running to true
-    if (inputVector.x != 0)
+    if (inputVector.x != 0 && rb.velocity.x != 0)
     {
       anim.SetBool("isIdle", false);
       anim.SetBool("isRunning", true);
