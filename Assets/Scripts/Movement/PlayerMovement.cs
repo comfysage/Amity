@@ -54,11 +54,8 @@ public class PlayerMovement : MonoBehaviour
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
 
       _timeLastJump = Time.unscaledTime;
-      Debug.Log(_timeLastJump +" in jump");
       if(_forgiveJump < 0)
       jumpCount++;
-
-       Debug.Log(jumpCount + " in spring");
       return;
     }
   }
@@ -98,7 +95,6 @@ public class PlayerMovement : MonoBehaviour
     if (_isGrounded && _timeLastJump + forgiveTime <= Time.unscaledTime) 
     {
       jumpCount = 0;
-      //Debug.Log(_timeLastJump+forgiveJump +" in val maar " + Time.unscaledTime);
     }
   }
 
