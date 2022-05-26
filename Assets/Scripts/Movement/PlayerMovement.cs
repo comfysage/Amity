@@ -91,12 +91,12 @@ public class PlayerMovement : MonoBehaviour
   void CheckAnimationState(Vector2 inputVector)
   {
     // Movement Input so flip character and set idle bool to false
-    if (inputVector.x > 0 && rb.velocity.x > 0)
+    if (inputVector.x > 0)
     {
       transform.localScale = new Vector3(_localScale.x, _localScale.y, _localScale.z);
       anim.SetBool("isIdle", false);
     }
-    if (inputVector.x < 0 && rb.velocity.x > 0)
+    if (inputVector.x < 0)
     {
       transform.localScale = new Vector3(-_localScale.x, _localScale.y, _localScale.z);
       anim.SetBool("isIdle", false);
