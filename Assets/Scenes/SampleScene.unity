@@ -1427,7 +1427,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 873055045}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d01f67adc661068448c64f7306633303, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -1460,7 +1460,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: d01f67adc661068448c64f7306633303, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -1484,6 +1484,7 @@ MonoBehaviour:
   movementSpeed: 3.2
   speedCap: 1
   jumpForce: 6
+  jumpFatigue: 0.85
   maxJump: 2
   forgiveJump: 0.25
   drawGroundcheckRaycast: 1
