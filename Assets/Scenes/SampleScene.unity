@@ -869,7 +869,7 @@ MonoBehaviour:
   anim: {fileID: 1662202234}
   movementSpeed: 3.2
   speedCap: 1
-  jumpForce: 5
+  jumpForce: 6
   maxJump: 2
   forgiveJump: 0.25
   drawGroundcheckRaycast: 1
