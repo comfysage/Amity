@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
   [Header("Debugging")]
   [SerializeField]
   bool drawGroundcheckRaycast;
+  bool _isGrounded;
 
 
   //local variables
@@ -43,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 
   void JumpAction(InputAction.CallbackContext context)
   {
-    if (isGrounded() || jumpCount < maxJump || _forgiveJump > 0)
+    if (_isGrounded || jumpCount < maxJump || _forgiveJump > 0)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
@@ -78,13 +79,13 @@ public class PlayerMovement : MonoBehaviour
 
     if (speedCap) CapVelocity();
 
-
-    if (!isGrounded() && jumpCount == 0)
+    _isGrounded = isGrounded();
+    if (!_isGrounded && jumpCount == 0)
     {
       jumpCount = 1;
       StartCoroutine(JumpForgive());
     }
-    if (isGrounded()) jumpCount = 0;
+    if (_isGrounded) jumpCount = 0;
   }
 
   void CheckAnimationState(Vector2 inputVector)
@@ -102,7 +103,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // if it is not grounded, always set airborne to true 
-    if (!isGrounded())
+    if (!_isGrounded)
     {
       anim.SetBool("isIdle", false);
       anim.SetBool("isRunning", false);
@@ -162,7 +163,7 @@ public class PlayerMovement : MonoBehaviour
   IEnumerator JumpForgive()
   {
     _forgiveJump = forgiveJump;
-    while (_forgiveJump > 0 && !isGrounded())
+    while (_forgiveJump > 0 && !_isGrounded)
     {
       _forgiveJump -= Time.deltaTime;
       yield return null;
