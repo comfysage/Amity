@@ -86,8 +86,6 @@ public class PlayerMovement : MonoBehaviour
 
   void CheckAnimationState(Vector2 inputVector)
   {
-    Debug.Log(inputVector.x);
-
     // Movement Input so flip character and set idle bool to false
     if (inputVector.x > 0)
     {
