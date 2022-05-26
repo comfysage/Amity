@@ -44,8 +44,6 @@ public class PlayerMovement : MonoBehaviour
     if (isGrounded() || jumpCount < maxJump || _forgiveJump > 0)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
-      anim.SetBool("isAirborne", true);
-      anim.SetBool("isRunning", false);
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
       jumpCount++;
       return;
