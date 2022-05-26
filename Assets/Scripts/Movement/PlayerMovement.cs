@@ -84,7 +84,8 @@ public class PlayerMovement : MonoBehaviour
   bool isGrounded()
   {
     float extraHeight = .1f;
-    RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeight, environmentMask);
+    //RaycastHit2D raycastHit = Physics2D.Raycast(bc.bounds.center, Vector2.down, bc.bounds.extents.y + extraHeight, environmentMask);
+    RaycastHit2D raycastHit = Physics2D.CircleCast(bc.bounds.center-new Vector3(bc.bounds.extents.x*0.7f, bc.bounds.extents.y, 0), extraHeight, Vector2.right, bc.bounds.extents.x*0.8f, environmentMask);
 
     Color rayColor;
     if(drawGroundcheckRaycast){ //Debug raycast
@@ -92,7 +93,9 @@ public class PlayerMovement : MonoBehaviour
       rayColor = Color.green;
     else 
       rayColor = Color.red;
-    Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeight), rayColor);
+    //Debug.DrawRay(bc.bounds.center, Vector2.down * (bc.bounds.extents.y + extraHeight), rayColor);
+    Debug.DrawRay(bc.bounds.center-new Vector3(bc.bounds.extents.x*0.7f, bc.bounds.extents.y+extraHeight, 0), Vector2.right * (bc.bounds.extents.x*0.8f + extraHeight), rayColor);
+    Debug.DrawRay(bc.bounds.center-new Vector3(bc.bounds.extents.x*0.7f, bc.bounds.extents.y-extraHeight, 0), Vector2.right * (bc.bounds.extents.x*0.8f + extraHeight), rayColor);
     }
 
     return raycastHit.collider != null;
@@ -112,4 +115,5 @@ public class PlayerMovement : MonoBehaviour
       yield return null;
     }
   }
+
 }

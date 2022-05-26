@@ -871,7 +871,7 @@ MonoBehaviour:
   jumpForce: 5
   maxJump: 2
   forgiveJump: 0.25
-  drawGroundcheckRaycast: 0
+  drawGroundcheckRaycast: 1
 --- !u!1 &1662202232
 GameObject:
   m_ObjectHideFlags: 0
