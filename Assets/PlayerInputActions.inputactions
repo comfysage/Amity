@@ -155,6 +155,17 @@
                 },
                 {
                     "name": "",
+                    "id": "91a62dc6-6222-4d61-9ff7-ab00b16bbe1a",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fe91ccfa-035e-40ab-ab3e-7574b022ff87",
                     "path": "<Keyboard>/d",
                     "interactions": "",
@@ -166,11 +177,33 @@
                 },
                 {
                     "name": "",
+                    "id": "346956c8-5d30-47cf-8472-2d179f480d95",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9e90c381-908a-4246-99fd-dd138d49154f",
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "Slash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08d7808b-21fd-44e2-a4dc-4d124e4dcb8f",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
                     "action": "Slash",
                     "isComposite": false,
                     "isPartOfComposite": false
