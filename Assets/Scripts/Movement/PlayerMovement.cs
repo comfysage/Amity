@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
+      if(_forgiveJump < 0)
       jumpCount++;
       return;
     }
