@@ -36,6 +36,9 @@ public class PlayerMovement : MonoBehaviour
   [Header("Debugging")]
   [SerializeField]
   bool drawGroundcheckRaycast;
+  [SerializeField]
+  float forgiveTime;
+  float _timeLastJump = -1;
   bool _isGrounded;
 
 
@@ -49,8 +52,13 @@ public class PlayerMovement : MonoBehaviour
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
+
+      _timeLastJump = Time.unscaledTime;
+      Debug.Log(_timeLastJump +" in jump");
       if(_forgiveJump < 0)
       jumpCount++;
+
+       Debug.Log(jumpCount + " in spring");
       return;
     }
   }
@@ -83,10 +91,15 @@ public class PlayerMovement : MonoBehaviour
     _isGrounded = isGrounded();
     if (!_isGrounded && jumpCount == 0)
     {
+      Debug.Log(jumpCount + " in val");
       jumpCount = 1;
       StartCoroutine(JumpForgive());
     }
-    if (_isGrounded) jumpCount = 0;
+    if (_isGrounded && _timeLastJump + forgiveTime <= Time.unscaledTime) 
+    {
+      jumpCount = 0;
+      //Debug.Log(_timeLastJump+forgiveJump +" in val maar " + Time.unscaledTime);
+    }
   }
 
   void CheckAnimationState(Vector2 inputVector)

@@ -1489,6 +1489,7 @@ MonoBehaviour:
   maxJump: 2
   forgiveJump: 0.25
   drawGroundcheckRaycast: 1
+  forgiveTime: 0.2
 --- !u!61 &873055050
 BoxCollider2D:
   m_ObjectHideFlags: 0
