@@ -54,8 +54,8 @@ public class PlayerMovement : MonoBehaviour
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
 
       _timeLastJump = Time.unscaledTime;
-      if(_forgiveJump < 0)
-      jumpCount++;
+      if (_forgiveJump < 0)
+        jumpCount++;
       return;
     }
   }
@@ -93,7 +93,7 @@ public class PlayerMovement : MonoBehaviour
       jumpCount = 1;
       StartCoroutine(JumpForgive());
     }
-    if (_isGrounded && _timeLastJump + forgiveTime <= Time.unscaledTime) 
+    if (_isGrounded && _timeLastJump + forgiveTime <= Time.unscaledTime)
     {
       jumpCount = 0;
     }
