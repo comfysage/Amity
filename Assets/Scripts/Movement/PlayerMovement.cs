@@ -14,9 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
   [SerializeField]
   [Header("Movement")]
-  float movementSpeed = 3.2f;
+  float movementSpeed = 4.2f;
   [SerializeField]
-  bool speedCap = true;
+  public float speedCapFactor = 1;
   [Space(2f)]
   [Header("Jumping")]
   [SerializeField]
@@ -81,9 +81,10 @@ public class PlayerMovement : MonoBehaviour
     Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
     CheckAnimationState(inputVector);
 
-    rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
+    // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
+    transform.position += new Vector3(inputVector.x, 0, 0) * Time.deltaTime * movementSpeed;
 
-    if (speedCap) CapVelocity();
+    // CapVelocity();
 
     _isGrounded = isGrounded();
     if (!_isGrounded && jumpCount == 0)
@@ -165,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 
   void CapVelocity()
   {
-    float cappedXVelocity = Mathf.Min(Mathf.Abs(rb.velocity.x), movementSpeed) * Mathf.Sign(rb.velocity.x);
+    float cappedXVelocity = Mathf.Min(Mathf.Abs(rb.velocity.x), (speedCapFactor * movementSpeed)) * Mathf.Sign(rb.velocity.x);
 
     rb.velocity = new Vector2(cappedXVelocity, rb.velocity.y);
   }
