@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
   public LayerMask environmentMask;
   Rigidbody2D rb;
   BoxCollider2D bc;
-  PlayerInputActions playerInputActions;
+  public PlayerInputActions playerInputActions { get; private set; }
   public Animator anim;
 
   [SerializeField]
