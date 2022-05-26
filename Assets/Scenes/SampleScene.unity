@@ -731,6 +731,7 @@ MonoBehaviour:
   environmentMask:
     serializedVersion: 2
     m_Bits: 64
+  anim: {fileID: 1662202234}
 --- !u!1 &1662202232
 GameObject:
   m_ObjectHideFlags: 0

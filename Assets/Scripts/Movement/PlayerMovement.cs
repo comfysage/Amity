@@ -6,10 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
   [SerializeField]
-  LayerMask environmentMask;
+  public LayerMask environmentMask;
   Rigidbody2D rb;
   BoxCollider2D bc;
   PlayerInputActions playerInputActions;
+  public Animator anim;
 
   float movementSpeed = 3.2f;
   bool speedCap = true;
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     if (isGrounded() || jumpCount < 2)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
+      anim.SetBool("isAirborne", true);
+      anim.SetBool("isRunning", false);
       rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
       jumpCount++;
       return;
@@ -32,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
   {
     rb = GetComponent<Rigidbody2D>();
     bc = GetComponent<BoxCollider2D>();
+    anim.SetBool("isIdle", true);
+    anim.SetBool("isRunning", false);
 
 
     playerInputActions = new PlayerInputActions();
@@ -42,14 +47,7 @@ public class PlayerMovement : MonoBehaviour
   void FixedUpdate()
   {
     Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-    if (inputVector.x > 0)
-    {
-      transform.localScale = new Vector3(2, 2, 2);
-    }
-    if (inputVector.x < 0)
-    {
-      transform.localScale = new Vector3(-2, 2, 2);
-    }
+    CheckAnimationState(inputVector);
     rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
     if (speedCap)
     {
@@ -58,6 +56,46 @@ public class PlayerMovement : MonoBehaviour
 
     if (!isGrounded() && jumpCount == 0) jumpCount = 1;
     if (isGrounded()) jumpCount = 0;
+  }
+
+  void CheckAnimationState(Vector2 inputVector)
+  {
+    Debug.Log(inputVector.x);
+
+    if (inputVector.x > 0)
+    {
+      transform.localScale = new Vector3(2, 2, 2);
+      anim.SetBool("isIdle", false);
+    }
+    if (inputVector.x < 0)
+    {
+      transform.localScale = new Vector3(-2, 2, 2);
+      anim.SetBool("isIdle", false);
+    }
+
+    if (!isGrounded())
+    {
+      anim.SetBool("isIdle", false);
+      anim.SetBool("isRunning", false);
+      anim.SetBool("isAirborne", true);
+      return;
+    };
+
+    anim.SetBool("isAirborne", false); // is not airborne
+
+    if (inputVector.x != 0)
+    {
+      anim.SetBool("isIdle", false);
+      anim.SetBool("isRunning", true);
+      return;
+    }
+
+    anim.SetBool("isRunning", false);
+
+    if (rb.velocity == new Vector2(0, 0))
+    {
+      anim.SetBool("isIdle", true);
+    }
   }
 
   bool isGrounded()
