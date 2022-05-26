@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
   [Space(2f)]
   [Header("Jumping")]
   [SerializeField]
-  float jumpForce = 5;
+  float jumpForce = 6;
   [SerializeField]
   int maxJump = 2;
   [SerializeField]
