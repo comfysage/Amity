@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
   [SerializeField]
   float jumpForce = 6;
   [SerializeField]
+  float jumpFatigue = 0.85f; // higher means less fatigue
+  [SerializeField]
   int maxJump = 2;
   [SerializeField]
   float forgiveJump;
@@ -44,7 +46,8 @@ public class PlayerMovement : MonoBehaviour
     if (isGrounded() || jumpCount < maxJump || _forgiveJump > 0)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
-      rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * jumpForce).y); // Consistent jump height
+      float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
+      rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
       jumpCount++;
       return;
     }
