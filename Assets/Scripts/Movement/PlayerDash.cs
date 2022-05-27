@@ -20,7 +20,10 @@ public class PlayerDash : MonoBehaviour
 
   void DashAction(InputAction.CallbackContext context)
   {
-    StartCoroutine(Dash());
+    if(PlayerMovement.currentState == PlayerMovement.playerState.Normal){
+      PlayerMovement.currentState = PlayerMovement.playerState.Dashing;
+      StartCoroutine(Dash());
+    }
   }
 
   IEnumerator Dash()
@@ -41,6 +44,7 @@ public class PlayerDash : MonoBehaviour
     // reset gravity and x velocity
     rb.gravityScale = _gravity;
     rb.velocity = new Vector2(_velocity.x, 0);
+    PlayerMovement.currentState = PlayerMovement.playerState.Normal;
   }
 
   void Awake()

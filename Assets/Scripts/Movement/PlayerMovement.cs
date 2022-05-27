@@ -5,6 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public enum playerState{
+    Normal,
+    Dashing,
+  }
+  public static playerState currentState = playerState.Normal;
+
   [SerializeField]
   public LayerMask environmentMask;
   Rigidbody2D rb;
@@ -47,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
   void JumpAction(InputAction.CallbackContext context)
   {
-    if (_isGrounded || jumpCount < maxJump || _forgiveJump > 0)
+    if ((_isGrounded || jumpCount < maxJump || _forgiveJump > 0) && currentState == playerState.Normal)
     {
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
       float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
@@ -82,7 +88,8 @@ public class PlayerMovement : MonoBehaviour
     CheckAnimationState(inputVector);
 
     // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
-    transform.position += new Vector3(inputVector.x, 0, 0) * Time.deltaTime * movementSpeed;
+    if(currentState == playerState.Normal)
+    rb.velocity = new Vector2(inputVector.x* Time.fixedDeltaTime * movementSpeed, rb.velocity.y);
 
     // CapVelocity();
 
