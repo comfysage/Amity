@@ -30,9 +30,10 @@ public class PlayerDash : MonoBehaviour
     rb.gravityScale = 0;
     _dashTime = dashTime;
     Vector3 position = transform.position;
+    // while dashing update position
     while (_dashTime > 0)
     {
-
+      // local with position value so moving is blocked
       position += new Vector3(direction, 0, 0) * dashSpeed * Time.deltaTime;
       transform.position = position;
       _dashTime -= Time.deltaTime;
