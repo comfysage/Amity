@@ -17,6 +17,9 @@ public class PlayerDash : MonoBehaviour
   [SerializeField]
   float dashTime = 0.38f;
   float _dashTime;
+  [SerializeField]
+  float dashFatigue = 0.38f;
+  float _dashFatigue;
 
   void DashAction(InputAction.CallbackContext context)
   {
@@ -45,6 +48,12 @@ public class PlayerDash : MonoBehaviour
     // reset gravity and x velocity
     rb.gravityScale = _gravity;
     rb.velocity = new Vector2(_velocity.x, 0);
+    _dashFatigue = dashFatigue;
+    while (_dashFatigue > 0)
+    {
+      _dashFatigue -= Time.deltaTime;
+      yield return null;
+    }
     PlayerMovement.currentState = PlayerMovement.playerState.Normal;
   }
 
