@@ -13,10 +13,10 @@ public class PlayerDash : MonoBehaviour
   float _gravity;
 
   [SerializeField]
-  float dashSpeed = 12f;
+  float dashSpeed = 6f;
   [SerializeField]
-  float dashTime = 1;
-  float _dashTime = 1;
+  float dashTime = 0.4f;
+  float _dashTime;
 
   void DashAction(InputAction.CallbackContext context)
   {
@@ -29,9 +29,12 @@ public class PlayerDash : MonoBehaviour
     _velocity = rb.velocity;
     rb.gravityScale = 0;
     _dashTime = dashTime;
+    Vector3 position = transform.position;
     while (_dashTime > 0)
     {
-      transform.position += new Vector3(direction * dashSpeed * Time.deltaTime, 0, 0);
+
+      position += new Vector3(direction, 0, 0) * dashSpeed * Time.deltaTime;
+      transform.position = position;
       _dashTime -= Time.deltaTime;
       yield return null;
     }
