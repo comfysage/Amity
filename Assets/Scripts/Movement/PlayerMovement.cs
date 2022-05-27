@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
   [SerializeField]
   [Header("Movement")]
-  float movementSpeed = 4.2f;
+  float movementSpeed = 180f;
   [SerializeField]
   public float speedCapFactor = 1;
   [Space(2f)]
