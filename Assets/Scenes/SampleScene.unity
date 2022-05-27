@@ -4367,7 +4367,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   anim: {fileID: 1662202234}
-  movementSpeed: 200
+  movementSpeed: 180
   speedCapFactor: 1
   jumpForce: 6
   jumpFatigue: 0.85
@@ -4415,8 +4415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 873055049}
-  dashSpeed: 6
-  dashTime: 0.4
+  dashSpeed: 8
+  dashTime: 0.38
 --- !u!1 &1662202232
 GameObject:
   m_ObjectHideFlags: 0

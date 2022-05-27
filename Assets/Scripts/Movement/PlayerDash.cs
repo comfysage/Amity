@@ -13,14 +13,15 @@ public class PlayerDash : MonoBehaviour
   float _gravity;
 
   [SerializeField]
-  float dashSpeed = 6f;
+  float dashSpeed = 8f;
   [SerializeField]
-  float dashTime = 0.4f;
+  float dashTime = 0.38f;
   float _dashTime;
 
   void DashAction(InputAction.CallbackContext context)
   {
-    if(PlayerMovement.currentState == PlayerMovement.playerState.Normal){
+    if (PlayerMovement.currentState == PlayerMovement.playerState.Normal)
+    {
       PlayerMovement.currentState = PlayerMovement.playerState.Dashing;
       StartCoroutine(Dash());
     }
