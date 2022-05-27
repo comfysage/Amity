@@ -5,7 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public enum playerState{
+  public enum playerState
+  {
     Normal,
     Dashing,
   }
@@ -88,8 +89,8 @@ public class PlayerMovement : MonoBehaviour
     CheckAnimationState(inputVector);
 
     // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
-    if(currentState == playerState.Normal)
-    rb.velocity = new Vector2(inputVector.x* Time.fixedDeltaTime * movementSpeed, rb.velocity.y);
+    if (currentState == playerState.Normal)
+      rb.velocity = new Vector2(inputVector.x * Time.fixedDeltaTime * movementSpeed, rb.velocity.y);
 
     // CapVelocity();
 

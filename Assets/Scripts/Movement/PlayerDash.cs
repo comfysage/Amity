@@ -20,7 +20,8 @@ public class PlayerDash : MonoBehaviour
 
   void DashAction(InputAction.CallbackContext context)
   {
-    if(PlayerMovement.currentState == PlayerMovement.playerState.Normal){
+    if (PlayerMovement.currentState == PlayerMovement.playerState.Normal)
+    {
       PlayerMovement.currentState = PlayerMovement.playerState.Dashing;
       StartCoroutine(Dash());
     }
