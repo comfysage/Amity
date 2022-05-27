@@ -4414,6 +4414,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pm: {fileID: 873055049}
+  dashSpeed: 6
+  dashTime: 0.4
 --- !u!1 &1662202232
 GameObject:
   m_ObjectHideFlags: 0
