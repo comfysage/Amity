@@ -29,13 +29,11 @@ public class PlayerDash : MonoBehaviour
     _velocity = rb.velocity;
     rb.gravityScale = 0;
     _dashTime = dashTime;
-    Vector3 position = transform.position;
+    rb.velocity = new Vector2(direction * dashSpeed, 0);
     // while dashing update position
     while (_dashTime > 0)
     {
       // local with position value so moving is blocked
-      position += new Vector3(direction, 0, 0) * dashSpeed * Time.deltaTime;
-      transform.position = position;
       _dashTime -= Time.deltaTime;
       yield return null;
     }
