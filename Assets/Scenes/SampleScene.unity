@@ -4367,12 +4367,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   anim: {fileID: 1662202234}
-  movementSpeed: 4.2
+  movementSpeed: 200
   speedCapFactor: 1
   jumpForce: 6
   jumpFatigue: 0.85
   maxJump: 2
   forgiveJump: 0.25
+  jumpQueueTime: 0.4
   drawGroundcheckRaycast: 1
   forgiveTime: 0.2
 --- !u!61 &873055050
