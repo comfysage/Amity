@@ -105,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
         _isGrounded = isGrounded();
         if (!_isGrounded && jumpCount == 0)
         {
-            Debug.Log(jumpCount + " in val");
             jumpCount = 1;
             StartCoroutine(JumpForgive());
         }
