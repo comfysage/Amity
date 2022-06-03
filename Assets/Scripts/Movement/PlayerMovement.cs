@@ -2,16 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static Player;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public enum playerState
-    {
-        Normal,
-        Dashing,
-    }
-    public static playerState currentState = playerState.Normal;
-
     [SerializeField]
     public LayerMask environmentMask;
     Rigidbody2D rb;
