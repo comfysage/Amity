@@ -10,9 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask environmentMask;
     Rigidbody2D rb;
     BoxCollider2D bc;
-    public PlayerInputActions playerInputActions { get; private set; }
     Vector2 inputVector;
-    public Animator anim;
 
     [SerializeField]
     [Header("Movement")]
@@ -73,8 +71,6 @@ public class PlayerMovement : MonoBehaviour
         anim.SetBool("isIdle", true);
         anim.SetBool("isRunning", false);
 
-
-        playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Jump.performed += JumpAction;
     }

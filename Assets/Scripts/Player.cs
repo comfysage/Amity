@@ -11,4 +11,6 @@ public class Player : MonoBehaviour
   }
   public static playerState currentState = playerState.Normal;
 
+  public static PlayerInputActions playerInputActions { get; private set; } = new PlayerInputActions();
+  public static Animator anim;
 }
