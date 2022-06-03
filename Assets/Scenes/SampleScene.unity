@@ -4468,6 +4468,7 @@ MonoBehaviour:
   attackPoint: {fileID: 751181036}
   attackRange: 0.5
   slashTime: 0.12
+  slashFatigueWaitTime: 0.18
   enemyLayers:
     serializedVersion: 2
     m_Bits: 0

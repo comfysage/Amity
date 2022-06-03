@@ -14,7 +14,9 @@ public class PlayerAttack : MonoBehaviour
   [SerializeField]
   public float slashTime = 0.12f;
   private float _slashTime;
-
+  [SerializeField]
+  public float slashFatigueWaitTime = 0.18f;
+  private float _slashFatigue;
   public LayerMask enemyLayers;
 
   void Awake()
@@ -24,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
 
   void SlashAction(InputAction.CallbackContext context)
   {
-    if (currentState == playerState.Normal)
+    if (currentState == playerState.Normal && _slashFatigue == 0)
     {
       currentState = playerState.Slashing;
       // animator.SetTrigger("Attack"); // Add Attack animation
@@ -48,6 +50,13 @@ public class PlayerAttack : MonoBehaviour
     }
 
     currentState = playerState.Normal;
+    _slashFatigue = slashFatigueWaitTime;
+    while (_slashFatigue > 0)
+    {
+      _slashFatigue -= Time.deltaTime;
+      yield return null;
+    }
+    _slashFatigue = 0;
   }
 
   void OnDrawGizmosSelected()
