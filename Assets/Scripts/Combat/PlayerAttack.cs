@@ -8,9 +8,10 @@ public class PlayerAttack : MonoBehaviour
 {
   public Animator animator;
 
-  public float attackPointOffset = 1f;
-  public float attackRange = 0.5f;
-  public float attackSize = 0.5f;
+  public Vector2 attackPointOffset = new Vector2(0, .1f);
+  public Vector2 attackPointRadius = new Vector2(.3f, .2f);
+  public float attackRange = 1f;
+  public float attackSize = .8f;
 
   private Vector2 _inputVector;
   private Vector2 _direction;
@@ -34,10 +35,10 @@ public class PlayerAttack : MonoBehaviour
   {
     _inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
     _direction = new Vector2(Mathf.Sign(transform.rotation.y), _inputVector.y);
-    _activePoint = transform.position;
+    _activePoint = transform.position + new Vector3(attackPointOffset.x, attackPointOffset.y, 0);
 
-    _activePoint.y += _inputVector.y;
-    _activePoint.x += _inputVector.y != 0 ? _inputVector.x : _direction.x;
+    _activePoint.y += _inputVector.y * attackPointRadius.y;
+    _activePoint.x += (_inputVector.y != 0 ? _inputVector.x : _direction.x) * attackPointRadius.x;
   }
 
   void SlashAction(InputAction.CallbackContext context)

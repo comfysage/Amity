@@ -4497,10 +4497,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1662202234}
-  attackPoint: {fileID: 751181036}
-  topPoint: {fileID: 0}
-  attackRange: 0.5
-  attackSize: 0.5
+  attackPointOffset: {x: 0, y: 0.1}
+  attackPointRadius: {x: 0.3, y: 0.2}
+  attackRange: 1
+  attackSize: 0.8
   slashTime: 0.12
   slashFatigueWaitTime: 0.18
   enemyLayers:
