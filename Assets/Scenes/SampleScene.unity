@@ -4373,7 +4373,7 @@ MonoBehaviour:
   jumpFatigue: 0.85
   maxJump: 2
   forgiveJump: 0.25
-  jumpQueueTime: 0.4
+  jumpQueueTime: 0.1
   drawGroundcheckRaycast: 1
   forgiveTime: 0.2
 --- !u!61 &873055050
