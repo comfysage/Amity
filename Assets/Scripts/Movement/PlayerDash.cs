@@ -7,6 +7,7 @@ using static Player;
 public class PlayerDash : MonoBehaviour
 {
   public PlayerMovement pm;
+  private PlayerInputActions playerInputActions;
   private Rigidbody2D rb;
 
   Vector2 _velocity;
@@ -65,6 +66,7 @@ public class PlayerDash : MonoBehaviour
   }
   void Start()
   {
+    playerInputActions = pm.playerInputActions;
     playerInputActions.Player.Dash.performed += DashAction;
   }
 }
