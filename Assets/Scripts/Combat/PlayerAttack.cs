@@ -18,13 +18,16 @@ public class PlayerAttack : MonoBehaviour
 
   void SlashAction(InputAction.CallbackContext context)
   {
-    // animator.SetTrigger("Attack"); // Add Attack animation
-
-    Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-    foreach (Collider2D enemy in hitEnemies)
+    if (currentState == playerState.Normal)
     {
-      Debug.Log("enemy hit: " + enemy.name);
+      // animator.SetTrigger("Attack"); // Add Attack animation
+
+      Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+      foreach (Collider2D enemy in hitEnemies)
+      {
+        Debug.Log("enemy hit: " + enemy.name);
+      }
     }
   }
 
