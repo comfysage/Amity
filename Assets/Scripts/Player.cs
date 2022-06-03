@@ -11,4 +11,10 @@ public class Player : MonoBehaviour
   }
   public static playerState currentState = playerState.Normal;
 
+  public static PlayerInputActions playerInputActions { get; private set; }
+
+  void Awake()
+  {
+    playerInputActions = new PlayerInputActions();
+  }
 }
