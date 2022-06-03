@@ -49,10 +49,6 @@ public class PlayerMovement : MonoBehaviour
     float _timeLastJump = -1;
     bool _isGrounded;
 
-
-    //local variables
-    Vector3 _localScale;
-
     void JumpAction(InputAction.CallbackContext context)
     {
         Jump();
@@ -87,9 +83,6 @@ public class PlayerMovement : MonoBehaviour
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
         playerInputActions.Player.Jump.performed += JumpAction;
-
-        _localScale = gameObject.transform.localScale;
-
     }
 
     void Update()
@@ -124,12 +117,12 @@ public class PlayerMovement : MonoBehaviour
         // Movement Input so flip character and set idle bool to false
         if (inputVector.x > 0)
         {
-            transform.localScale = new Vector3(_localScale.x, _localScale.y, _localScale.z);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
             anim.SetBool("isIdle", false);
         }
         if (inputVector.x < 0)
         {
-            transform.localScale = new Vector3(-_localScale.x, _localScale.y, _localScale.z);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
             anim.SetBool("isIdle", false);
         }
 

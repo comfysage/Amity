@@ -32,7 +32,7 @@ public class PlayerDash : MonoBehaviour
 
   IEnumerator Dash()
   {
-    float direction = Mathf.Sign(transform.localScale.x);
+    float direction = Mathf.Sign(transform.rotation.y);
     _velocity = rb.velocity;
     rb.gravityScale = 0;
     _dashTime = dashTime;
