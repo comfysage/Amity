@@ -13,10 +13,10 @@ public class PlayerAttack : MonoBehaviour
 
   void Awake()
   {
-    playerInputActions.Player.Slash.performed += Attack;
+    playerInputActions.Player.Slash.performed += SlashAction;
   }
 
-  void Attack(InputAction.CallbackContext context)
+  void SlashAction(InputAction.CallbackContext context)
   {
     // animator.SetTrigger("Attack"); // Add Attack animation
 
