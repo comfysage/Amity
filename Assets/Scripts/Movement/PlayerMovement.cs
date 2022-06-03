@@ -92,9 +92,13 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    void FixedUpdate()
+    void Update()
     {
         inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+    }
+
+    void FixedUpdate()
+    {
         CheckAnimationState(inputVector);
 
         // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
