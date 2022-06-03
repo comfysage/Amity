@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
   {
     Normal,
     Dashing,
+    Slashing,
   }
   public static playerState currentState = playerState.Normal;
 

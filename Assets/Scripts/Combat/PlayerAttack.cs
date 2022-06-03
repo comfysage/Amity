@@ -20,6 +20,7 @@ public class PlayerAttack : MonoBehaviour
   {
     if (currentState == playerState.Normal)
     {
+      currentState = playerState.Slashing;
       // animator.SetTrigger("Attack"); // Add Attack animation
 
       Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
@@ -28,6 +29,8 @@ public class PlayerAttack : MonoBehaviour
       {
         Debug.Log("enemy hit: " + enemy.name);
       }
+
+      currentState = playerState.Normal;
     }
   }
 
