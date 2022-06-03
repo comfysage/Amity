@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using static Player;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -9,7 +11,12 @@ public class PlayerAttack : MonoBehaviour
   public float attackRange = 0.5f;
   public LayerMask enemyLayers;
 
-  void Attack()
+  void Awake()
+  {
+    playerInputActions.Player.Slash.performed += Attack;
+  }
+
+  void Attack(InputAction.CallbackContext context)
   {
     // animator.SetTrigger("Attack"); // Add Attack animation
 
