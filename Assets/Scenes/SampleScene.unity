@@ -4312,6 +4312,7 @@ GameObject:
   - component: {fileID: 873055047}
   - component: {fileID: 873055049}
   - component: {fileID: 873055051}
+  - component: {fileID: 873055052}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4450,6 +4451,24 @@ MonoBehaviour:
   dashSpeed: 12
   dashTime: 0.25
   dashFatigueWaitTime: 0.38
+--- !u!114 &873055052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 873055045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a961920a914bdc94093deda731eac4e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1662202234}
+  attackPoint: {fileID: 751181036}
+  attackRange: 0.5
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1662202232
 GameObject:
   m_ObjectHideFlags: 0
