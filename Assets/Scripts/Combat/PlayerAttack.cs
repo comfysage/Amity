@@ -11,8 +11,9 @@ public class PlayerAttack : MonoBehaviour
   public Transform attackPoint;
   public float attackRange = 0.5f;
 
-  public float slashTime = 0.38f;
-  public float _slashTime;
+  [SerializeField]
+  public float slashTime = 0.12f;
+  private float _slashTime;
 
   public LayerMask enemyLayers;
 
