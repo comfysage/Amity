@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     BoxCollider2D bc;
     public PlayerInputActions playerInputActions { get; private set; }
+    Vector2 inputVector;
     public Animator anim;
 
     [SerializeField]
@@ -93,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
         CheckAnimationState(inputVector);
 
         // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
