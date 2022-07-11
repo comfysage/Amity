@@ -23,8 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public float speedCapFactor = 1;
     [Space(2f)]
     [Header("Jumping")]
-    [SerializeField]
-    float jumpForce = 6;
+    [SerializeField, Range(0f, 10f)] private float _jumpHeight = 3f;
+    float _jumpSpeed;
     [SerializeField, Range(0f, 5f)] private float _downwardMovementMultiplier = 3f;
     [SerializeField, Range(0f, 5f)] private float _upwardMovementMultiplier = 1.7f;
     private float _defaultGravityScale;
@@ -61,9 +61,22 @@ public class PlayerMovement : MonoBehaviour
     {
       if (canJump()){
       // rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse); // jump height based on momentum (inconsistent and awkward)
-      float _jumpForce = jumpCount == 0 ? jumpForce : (jumpForce * jumpFatigue);
+      _velocity = rb.velocity;
 
-      rb.velocity = new Vector2(rb.velocity.x, (Vector2.up * _jumpForce).y); // Consistent jump height
+      _jumpSpeed = Mathf.Sqrt(-2f * Physics2D.gravity.y * _jumpHeight * (jumpCount == 0 ? 1: jumpFatigue));
+
+      if (_velocity.y > 0f)
+      {
+        _jumpSpeed = Mathf.Max(_jumpSpeed - _velocity.y, 0f);
+      }
+      else if (_velocity.y < 0f)
+      {
+        _jumpSpeed += Mathf.Abs(rb.velocity.y);
+      }
+
+      _velocity.y += _jumpSpeed;
+      rb.velocity = _velocity;
+
       _timeLastJump = Time.unscaledTime;
       if (_forgiveJump < 0)
           jumpCount++;
