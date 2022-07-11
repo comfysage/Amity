@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Jumping")]
     [SerializeField]
     float jumpForce = 6;
+    [SerializeField, Range(0f, 5f)] private float _downwardMovementMultiplier = 3f;
+    [SerializeField, Range(0f, 5f)] private float _upwardMovementMultiplier = 1.7f;
+    private float _defaultGravityScale;
     [SerializeField]
     float jumpFatigue = 0.85f; // higher means less fatigue
     [SerializeField]
@@ -77,6 +80,8 @@ public class PlayerMovement : MonoBehaviour
 
         playerInputActions.Player.Enable();
         playerInputActions.Player.Jump.performed += JumpAction;
+
+        _defaultGravityScale = 1f;
     }
 
     void Update()
@@ -113,6 +118,20 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpCount = 0;
         }
+
+        if (rb.velocity.y > 0)
+        {
+          rb.gravityScale = _upwardMovementMultiplier;
+        }
+        else if (rb.velocity.y < 0)
+        {
+          rb.gravityScale = _downwardMovementMultiplier;
+        }
+        else if(rb.velocity.y == 0)
+        {
+          rb.gravityScale = _defaultGravityScale;
+        }
+
     }
 
     void CheckAnimationState(Vector2 inputVector)
