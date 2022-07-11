@@ -13,9 +13,12 @@ public class PlayerMovement : MonoBehaviour
     Vector2 inputVector;
     public Animator anim;
 
-    [SerializeField]
     [Header("Movement")]
-    float movementSpeed = 4.2f;
+    [SerializeField, Range(0f, 12f)] private float _maxSpeed = 8f;
+    [SerializeField, Range(0f, 50f)] private float _maxAcceleration = 40f;
+    [SerializeField, Range(0f, 50f)] private float _maxAirAcceleration = 45f;
+    private float _maxSpeedChange, _acceleration;
+    private Vector2 _direction, _desiredVelocity, _velocity;
     [SerializeField]
     public float speedCapFactor = 1;
     [Space(2f)]
@@ -79,19 +82,28 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
+        _direction.x = inputVector.x;
+        _desiredVelocity = new Vector2(_direction.x, 0f) * Mathf.Max(_maxSpeed - 2f, 0f);
     }
 
     void FixedUpdate()
     {
         CheckAnimationState(inputVector);
+        _isGrounded = isGrounded();
 
         // rb.AddForce(new Vector2(inputVector.x, 0) * movementSpeed, ForceMode2D.Impulse);
-        if (currentState == playerState.Normal)
-            rb.velocity = new Vector2(inputVector.x * Time.fixedDeltaTime * movementSpeed, rb.velocity.y);
+        if (currentState == playerState.Normal){
+          _velocity = rb.velocity;
+          _acceleration = _isGrounded ? _maxAcceleration : _maxAirAcceleration;
+          _maxSpeedChange = _acceleration * Time.deltaTime;
+          _velocity.x = Mathf.MoveTowards(_velocity.x, _desiredVelocity.x, _maxSpeedChange);
+
+          rb.velocity = _velocity;
+            // rb.velocity = new Vector2(inputVector.x * Time.fixedDeltaTime * movementSpeed, rb.velocity.y);
+        }
 
         // CapVelocity();
 
-        _isGrounded = isGrounded();
         if (!_isGrounded && jumpCount == 0)
         {
             jumpCount = 1;
@@ -170,9 +182,9 @@ public class PlayerMovement : MonoBehaviour
 
     void CapVelocity()
     {
-        float cappedXVelocity = Mathf.Min(Mathf.Abs(rb.velocity.x), (speedCapFactor * movementSpeed)) * Mathf.Sign(rb.velocity.x);
+        // float cappedXVelocity = Mathf.Min(Mathf.Abs(rb.velocity.x), (speedCapFactor * movementSpeed)) * Mathf.Sign(rb.velocity.x);
 
-        rb.velocity = new Vector2(cappedXVelocity, rb.velocity.y);
+        // rb.velocity = new Vector2(cappedXVelocity, rb.velocity.y);
     }
 
     IEnumerator JumpForgive()
