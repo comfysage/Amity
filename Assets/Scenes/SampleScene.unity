@@ -4341,10 +4341,10 @@ GameObject:
   - component: {fileID: 873055048}
   - component: {fileID: 873055050}
   - component: {fileID: 873055047}
+  - component: {fileID: 873055053}
   - component: {fileID: 873055049}
   - component: {fileID: 873055051}
   - component: {fileID: 873055052}
-  - component: {fileID: 873055053}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4433,7 +4433,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   anim: {fileID: 1662202234}
-  movementSpeed: 180
+  _maxSpeed: 8
+  _maxAcceleration: 40
+  _maxAirAcceleration: 45
   speedCapFactor: 1
   jumpForce: 9
   jumpFatigue: 0.85
